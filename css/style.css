@@ -1,0 +1,583 @@
+/**
+ * Emoji RPG Builder - Styles
+ */
+
+/* Base Styles */
+:root {
+    --primary-color: #4a6baf;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --border-color: #dee2e6;
+    --sidebar-width: 250px;
+    --header-height: 60px;
+    --footer-height: 40px;
+    --canvas-bg: #f0f0f0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-color);
+    background-color: #f5f5f5;
+}
+
+/* Layout */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.app-header {
+    height: var(--header-height);
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-footer {
+    height: var(--footer-height);
+    background-color: var(--dark-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+/* Header Components */
+.logo {
+    flex: 1;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.app-controls {
+    display: flex;
+    gap: 10px;
+    margin-right: 20px;
+}
+
+.mode-toggle {
+    display: flex;
+}
+
+.mode-toggle-btn {
+    border-radius: 0;
+    border: none;
+    padding: 10px 15px;
+    background-color: var(--primary-color);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.mode-toggle-btn.active {
+    background-color: var(--light-color);
+    color: var(--primary-color);
+}
+
+/* Mode Containers */
+.mode-container {
+    display: none;
+    flex: 1;
+}
+
+.mode-container.active {
+    display: flex;
+}
+
+/* Editor Layout */
+.editor-layout {
+    display: flex;
+    height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: white;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.right-sidebar {
+    border-right: none;
+    border-left: 1px solid var(--border-color);
+}
+
+.sidebar-header {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.sidebar-section {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--border-color);
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Canvas Container */
+.canvas-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--canvas-bg);
+    overflow: hidden;
+}
+
+.canvas-toolbar {
+    height: 50px;
+    background-color: white;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    gap: 20px;
+}
+
+.tool-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.canvas {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Emoji Palette */
+.search-container {
+    position: relative;
+    margin-top: 10px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 8px 30px 8px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.search-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+}
+
+.emoji-categories {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 5px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.category-btn {
+    padding: 5px 10px;
+    background-color: var(--light-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.category-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.emoji-palette {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-content: flex-start;
+}
+
+.emoji-item {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    background-color: var(--light-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.emoji-item:hover {
+    background-color: #e9ecef;
+    transform: scale(1.1);
+}
+
+/* Layers Panel */
+.layer-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.layers-list {
+    list-style: none;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.layer-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.layer-item.active {
+    background-color: #e9ecef;
+}
+
+.layer-item.dragging {
+    opacity: 0.5;
+}
+
+.layer-item.drag-over {
+    border-top: 2px solid var(--primary-color);
+}
+
+.layer-visibility {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.layer-name {
+    flex: 1;
+}
+
+.layer-drag-handle {
+    cursor: move;
+    color: var(--secondary-color);
+}
+
+/* Properties Panel */
+.properties-panel {
+    padding: 15px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.no-selection-message {
+    color: var(--secondary-color);
+    font-style: italic;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.properties-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.property-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.property-group h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+.property-group label {
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+}
+
+.property-group input,
+.property-group select {
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+/* Player Mode */
+.player-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - var(--header-height) - var(--footer-height));
+    background-color: var(--dark-color);
+}
+
+.game-container {
+    position: relative;
+    background-color: black;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.game-controls {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 12px;
+    background-color: var(--light-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #e9ecef;
+}
+
+.btn.primary {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.btn.primary:hover {
+    background-color: #3f5c99;
+}
+
+.btn.small {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+}
+
+.mode-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    background-color: var(--light-color);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.mode-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 500px;
+    max-width: 90%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.close-modal {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--secondary-color);
+}
+
+.modal-body {
+    padding: 15px;
+    overflow-y: auto;
+    max-height: 60vh;
+}
+
+.modal-footer {
+    padding: 15px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    :root {
+        --sidebar-width: 220px;
+    }
+}
+
+@media (max-width: 992px) {
+    .editor-layout {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: 300px;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .canvas-container {
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .logo, .app-controls, .mode-toggle {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .app-controls {
+        justify-content: center;
+    }
+
+    .mode-toggle {
+        justify-content: center;
+    }
+}
+
+/* Fullscreen Mode */
+.game-container:-webkit-full-screen {
+    width: 100vw;
+    height: 100vh;
+}
+
+.game-container:-moz-full-screen {
+    width: 100vw;
+    height: 100vh;
+}
+
+.game-container:-ms-fullscreen {
+    width: 100vw;
+    height: 100vh;
+}
+
+.game-container:fullscreen {
+    width: 100vw;
+    height: 100vh;
+}

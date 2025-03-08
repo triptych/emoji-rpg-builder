@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Emoji RPG Builder</title>
+        <link rel="stylesheet" href="css/style.css">
+        <!-- Font Awesome for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </head>
+    <body>
+        <div class="app-container">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="logo">
+                    <h1>🎮 Emoji RPG Builder</h1>
+                </div>
+                <div class="app-controls">
+                    <button id="newGameBtn" class="btn" title="New Game">
+                        <i class="fas fa-file"></i>
+                        New
+                    </button>
+                    <button id="saveGameBtn" class="btn" title="Save Game">
+                        <i class="fas fa-save"></i>
+                        Save
+                    </button>
+                    <button id="loadGameBtn" class="btn" title="Load Game">
+                        <i class="fas fa-folder-open"></i>
+                        Load
+                    </button>
+                    <button id="exportGameBtn" class="btn" title="Export Game">
+                        <i class="fas fa-file-export"></i>
+                        Export
+                    </button>
+                    <button id="importGameBtn" class="btn" title="Import Game">
+                        <i class="fas fa-file-import"></i>
+                        Import
+                    </button>
+                </div>
+                <div class="mode-toggle">
+                    <button id="editorBtn" class="btn mode-toggle-btn active" title="Editor Mode">
+                        <i class="fas fa-edit"></i>
+                        Editor
+                    </button>
+                    <button id="playerBtn" class="btn mode-toggle-btn" title="Player Mode">
+                        <i class="fas fa-play"></i>
+                        Play
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="app-main">
+                <!-- Editor Mode -->
+                <div id="editorMode" class="mode-container active">
+                    <div class="editor-layout">
+                        <!-- Left Sidebar - Emoji Palette -->
+                        <div class="sidebar left-sidebar">
+                            <div class="sidebar-header">
+                                <h2>Emoji Palette</h2>
+                                <div class="search-container">
+                                    <input type="text" id="emojiSearch" placeholder="Search emojis...">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                            </div>
+                            <div class="emoji-categories">
+                                <button class="category-btn active" data-category="all">All</button>
+                                <button class="category-btn" data-category="people">People</button>
+                                <button class="category-btn" data-category="nature">Nature</button>
+                                <button class="category-btn" data-category="food">Food</button>
+                                <button class="category-btn" data-category="activities">Activities</button>
+                                <button class="category-btn" data-category="travel">Travel</button>
+                                <button class="category-btn" data-category="objects">Objects</button>
+                                <button class="category-btn" data-category="symbols">Symbols</button>
+                            </div>
+                            <div id="emojiPalette" class="emoji-palette">
+                                <!-- Emojis will be populated here by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Center - Canvas Area -->
+                        <div class="canvas-container">
+                            <div class="canvas-toolbar">
+                                <div class="tool-group">
+                                    <button class="mode-btn active" data-mode="place" title="Place Emoji">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                    <button class="mode-btn" data-mode="select" title="Select & Move">
+                                        <i class="fas fa-mouse-pointer"></i>
+                                    </button>
+                                    <button class="mode-btn" data-mode="delete" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div class="tool-group">
+                                    <div class="toggle-container">
+                                        <label for="gridToggle">Grid</label>
+                                        <input type="checkbox" id="gridToggle" checked="checked">
+                                    </div>
+                                    <div class="toggle-container">
+                                        <label for="snapToggle">Snap</label>
+                                        <input type="checkbox" id="snapToggle" checked="checked">
+                                    </div>
+                                </div>
+                                <div class="tool-group">
+                                    <button id="zoomOutBtn" class="btn" title="Zoom Out">
+                                        <i class="fas fa-search-minus"></i>
+                                    </button>
+                                    <span id="zoomLevel">100%</span>
+                                    <button id="zoomInBtn" class="btn" title="Zoom In">
+                                        <i class="fas fa-search-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="editorCanvas" class="canvas">
+                                <!-- Canvas will be attached here by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Right Sidebar - Layers & Properties -->
+                        <div class="sidebar right-sidebar">
+                            <div class="sidebar-section">
+                                <div class="sidebar-header">
+                                    <h2>Layers</h2>
+                                    <div class="layer-controls">
+                                        <button id="addLayerBtn" class="btn small" title="Add Layer">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                        <button id="deleteLayerBtn" class="btn small" title="Delete Layer">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <ul id="layersList" class="layers-list">
+                                    <!-- Layers will be populated here by JavaScript -->
+                                </ul>
+                            </div>
+                            <div class="sidebar-section">
+                                <div class="sidebar-header">
+                                    <h2>Properties</h2>
+                                </div>
+                                <div id="propertiesPanel" class="properties-panel">
+                                    <!-- Properties will be populated here by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player Mode -->
+                <div id="playerMode" class="mode-container">
+                    <div class="player-layout">
+                        <div class="game-container">
+                            <div id="gameCanvas" class="canvas">
+                                <!-- Canvas will be attached here by JavaScript -->
+                            </div>
+                            <div class="game-controls">
+                                <button id="playBtn" class="btn" title="Play">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button id="pauseBtn" class="btn" title="Pause">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <button id="resetBtn" class="btn" title="Reset">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                                <button id="fullscreenBtn" class="btn" title="Fullscreen">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer class="app-footer">
+                <p>&copy; 2025 Emoji RPG Builder</p>
+            </footer>
+        </div>
+
+        <!-- Modals -->
+        <!-- Behavior Modal -->
+        <div id="behaviorModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Edit Behavior</h2>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="behaviorType">Behavior Type</label>
+                        <select id="behaviorType">
+                            <option value="static">Static (Non-moving)</option>
+                            <option value="player">Player Controlled</option>
+                            <option value="ai">AI Controlled</option>
+                            <option value="collectible">Collectible</option>
+                            <option value="obstacle">Obstacle</option>
+                            <option value="trigger">Trigger</option>
+                        </select>
+                    </div>
+                    <div id="behaviorProperties">
+                        <!-- Behavior properties will be populated here by JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancelBehaviorBtn" class="btn">Cancel</button>
+                    <button id="saveBehaviorBtn" class="btn primary">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Settings Modal -->
+        <div id="gameSettingsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Game Settings</h2>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="gameTitle">Game Title</label>
+                        <input type="text" id="gameTitle" placeholder="Enter game title">
+                    </div>
+                    <div class="form-group">
+                        <label for="gameAuthor">Author</label>
+                        <input type="text" id="gameAuthor" placeholder="Enter author name">
+                    </div>
+                    <div class="form-group">
+                        <label for="gameDescription">Description</label>
+                        <textarea id="gameDescription" placeholder="Enter game description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="gameWidth">Width</label>
+                        <input type="number" id="gameWidth" value="800">
+                    </div>
+                    <div class="form-group">
+                        <label for="gameHeight">Height</label>
+                        <input type="number" id="gameHeight" value="600">
+                    </div>
+                    <div class="form-group">
+                        <label for="gameGravity">Gravity (0-10)</label>
+                        <input type="range" id="gameGravity" min="0" max="10" value="5">
+                    </div>
+                    <div class="form-group">
+                        <label for="gameFriction">Friction (0-1)</label>
+                        <input type="range" id="gameFriction" min="0" max="10" value="1" step="0.1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancelSettingsBtn" class="btn">Cancel</button>
+                    <button id="saveSettingsBtn" class="btn primary">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script type="module" src="js/emoji-data.js"></script>
+        <script type="module" src="js/engine.js"></script>
+        <script type="module" src="js/storage.js"></script>
+        <script type="module" src="js/editor.js"></script>
+    </body>
+</html>
